@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: riskshield_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - riskshield_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: riskshield_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - DATABASE_NAME=riskshield_db
+      - LLM_API_KEY=
+      - LLM_BASE_URL=https://api.openai.com/v1
+      - LLM_MODEL=gpt-4o-mini
+      - SECRET_KEY=riskshield-ai-production-super-secret-jwt-key-2026-secure
+      - FRONTEND_URL=http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - riskshield_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: riskshield_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - riskshield_network
+
+networks:
+  riskshield_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local

@@ -1,0 +1,210 @@
+{
+  "model_comparison": {
+    "logistic_regression": {
+      "model_name": "Logistic Regression (Baseline)",
+      "model_version": "v1.0-baseline",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "fpr": 0.0,
+      "confusion_matrix": {
+        "true_negative": 1481,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 96
+      }
+    },
+    "random_forest": {
+      "model_name": "Random Forest Classifier",
+      "model_version": "v1.0-rf",
+      "precision": 1.0,
+      "recall": 0.9896,
+      "f1_score": 0.9948,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "fpr": 0.0,
+      "confusion_matrix": {
+        "true_negative": 1481,
+        "false_positive": 0,
+        "false_negative": 1,
+        "true_positive": 95
+      }
+    },
+    "xgboost": {
+      "model_name": "XGBoost Fraud Classifier (Primary)",
+      "model_version": "xgboost_v1.0",
+      "is_active": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "fpr": 0.0,
+      "confusion_matrix": {
+        "true_negative": 1481,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 96
+      }
+    }
+  },
+  "active_model": {
+    "model_name": "XGBoost Fraud Classifier",
+    "model_version": "xgboost_v1.0",
+    "training_date": "2026-08-22 03:48:35 UTC",
+    "train_samples": 7354,
+    "test_samples": 1577,
+    "feature_count": 27,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "fpr": 0.0,
+    "confusion_matrix": {
+      "true_negative": 1481,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_positive": 96
+    },
+    "feature_importances": [
+      {
+        "feature": "amount_zscore",
+        "importance": 0.3469,
+        "description": "Standard deviations from user mean spend"
+      },
+      {
+        "feature": "spending_pattern_deviation",
+        "importance": 0.2467,
+        "description": "Ratio of current transaction to historical average"
+      },
+      {
+        "feature": "transactions_last_10min",
+        "importance": 0.168,
+        "description": "Medium-term burst transaction velocity (10 min)"
+      },
+      {
+        "feature": "transactions_last_5min",
+        "importance": 0.1296,
+        "description": "Short-term burst transaction velocity (5 min)"
+      },
+      {
+        "feature": "amount_last_10min",
+        "importance": 0.0269,
+        "description": "Cumulative transaction volume in past 10 min"
+      },
+      {
+        "feature": "country_change",
+        "importance": 0.02,
+        "description": "Transaction originated outside home country"
+      },
+      {
+        "feature": "amount_deviation",
+        "importance": 0.0129,
+        "description": "Difference between current amount and user average spend"
+      },
+      {
+        "feature": "is_new_device",
+        "importance": 0.0104,
+        "description": "Transaction originated from an unrecognized device"
+      },
+      {
+        "feature": "historical_average_amount",
+        "importance": 0.0074,
+        "description": "Customer historical mean spend"
+      },
+      {
+        "feature": "historical_max_amount",
+        "importance": 0.0074,
+        "description": "Customer highest recorded transaction"
+      },
+      {
+        "feature": "account_age_days",
+        "importance": 0.0067,
+        "description": "Customer account age in days"
+      },
+      {
+        "feature": "transaction_hour",
+        "importance": 0.0053,
+        "description": "Time of day (0-23)"
+      },
+      {
+        "feature": "amount",
+        "importance": 0.0044,
+        "description": "Transaction amount in INR"
+      },
+      {
+        "feature": "historical_transaction_count",
+        "importance": 0.0024,
+        "description": "Total prior transactions by customer"
+      },
+      {
+        "feature": "merchant_category_encoded",
+        "importance": 0.0021,
+        "description": "Categorical code for merchant sector"
+      },
+      {
+        "feature": "payment_method_encoded",
+        "importance": 0.0012,
+        "description": "Payment method type (UPI, Card, etc.)"
+      },
+      {
+        "feature": "amount_last_1hour",
+        "importance": 0.0008,
+        "description": "Cumulative transaction volume in past 1 hour"
+      },
+      {
+        "feature": "transactions_last_1hour",
+        "importance": 0.0006,
+        "description": "Hourly transaction velocity"
+      },
+      {
+        "feature": "day_of_week",
+        "importance": 0.0003,
+        "description": "Day of week (0=Mon, 6=Sun)"
+      },
+      {
+        "feature": "previous_failed_transactions",
+        "importance": 0.0,
+        "description": "Number of recent failed attempts"
+      },
+      {
+        "feature": "previous_fraud_count",
+        "importance": 0.0,
+        "description": "Prior confirmed fraudulent incidents"
+      },
+      {
+        "feature": "device_age_days",
+        "importance": 0.0,
+        "description": "Number of days this device has been associated with account"
+      },
+      {
+        "feature": "device_change_count",
+        "importance": 0.0,
+        "description": "Frequency of device switching by customer"
+      },
+      {
+        "feature": "accounts_using_device",
+        "importance": 0.0,
+        "description": "Number of distinct accounts sharing this device"
+      },
+      {
+        "feature": "distance_from_previous_transaction",
+        "importance": 0.0,
+        "description": "Haversine distance (km) from last known transaction"
+      },
+      {
+        "feature": "location_change_frequency",
+        "importance": 0.0,
+        "description": "Rate of geographical movement across sessions"
+      },
+      {
+        "feature": "unusual_time",
+        "importance": 0.0,
+        "description": "Transaction executed during off-peak hours (1 AM - 5 AM)"
+      }
+    ]
+  }
+}
