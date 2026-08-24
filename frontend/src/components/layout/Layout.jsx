@@ -10,7 +10,11 @@ export default function Layout({
   onDataReset,
   currentUser,
   onRoleSwitch,
-  alertCount
+  alertCount,
+  onOpenCopilot,
+  onOpenTransaction,
+  onOpenCustomer,
+  onOpenDevice
 }) {
   return (
     <div className="flex min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
@@ -30,6 +34,11 @@ export default function Layout({
           onDataReset={onDataReset}
           currentUser={currentUser}
           onRoleSwitch={onRoleSwitch}
+          onOpenCopilot={onOpenCopilot}
+          onOpenTransaction={onOpenTransaction}
+          onOpenCustomer={onOpenCustomer}
+          onOpenDevice={onOpenDevice}
+          onNavigateTab={setTab}
         />
         <main className="flex-1 p-6 max-w-7xl w-full mx-auto">
           {children}

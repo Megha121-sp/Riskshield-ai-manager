@@ -10,11 +10,17 @@ import AnalyticsPage from './pages/AnalyticsPage';
 import ModelPerformancePage from './pages/ModelPerformancePage';
 import AuditLogsPage from './pages/AuditLogsPage';
 import ScenarioModal from './components/common/ScenarioModal';
-import { alertsAPI, authAPI } from './services/api';
+import RiskCopilot from './components/copilot/RiskCopilot';
+import CustomerProfileModal from './components/customer/CustomerProfileModal';
+import DeviceInvestigationModal from './components/device/DeviceInvestigationModal';
+import { alertsAPI } from './services/api';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('overview');
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
+  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
+  const [copilotOpen, setCopilotOpen] = useState(false);
   const [scenarioModalOpen, setScenarioModalOpen] = useState(false);
   const [alertCount, setAlertCount] = useState(0);
   const [currentUser, setCurrentUser] = useState({
@@ -42,6 +48,16 @@ export default function App() {
 
   const handleOpenTransaction = (txId) => {
     setSelectedTransactionId(txId);
+    setSelectedCustomerId(null);
+    setSelectedDeviceId(null);
+  };
+
+  const handleOpenCustomer = (custId) => {
+    setSelectedCustomerId(custId);
+  };
+
+  const handleOpenDevice = (devId) => {
+    setSelectedDeviceId(devId);
   };
 
   const handleBackToQueue = () => {
@@ -78,13 +94,22 @@ export default function App() {
           transactionId={selectedTransactionId}
           onBack={handleBackToQueue}
           onOpenTransaction={handleOpenTransaction}
+          onOpenCustomer={handleOpenCustomer}
+          onOpenDevice={handleOpenDevice}
         />
       );
     }
 
     switch (currentTab) {
       case 'overview':
-        return <OverviewPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
+        return (
+          <OverviewPage
+            key={refreshKey}
+            onOpenTransaction={handleOpenTransaction}
+            onOpenCustomer={handleOpenCustomer}
+            onOpenDevice={handleOpenDevice}
+          />
+        );
       case 'transactions':
         return <TransactionsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
       case 'alerts':
@@ -92,7 +117,14 @@ export default function App() {
       case 'investigations':
         return <InvestigationsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
       case 'fraud':
-        return <FraudIntelligencePage key={refreshKey} />;
+        return (
+          <FraudIntelligencePage
+            key={refreshKey}
+            onOpenTransaction={handleOpenTransaction}
+            onOpenCustomer={handleOpenCustomer}
+            onOpenDevice={handleOpenDevice}
+          />
+        );
       case 'analytics':
         return <AnalyticsPage key={refreshKey} />;
       case 'model':
@@ -100,7 +132,14 @@ export default function App() {
       case 'audit':
         return <AuditLogsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
       default:
-        return <OverviewPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
+        return (
+          <OverviewPage
+            key={refreshKey}
+            onOpenTransaction={handleOpenTransaction}
+            onOpenCustomer={handleOpenCustomer}
+            onOpenDevice={handleOpenDevice}
+          />
+        );
     }
   };
 
@@ -111,11 +150,15 @@ export default function App() {
         setSelectedTransactionId(null);
         setCurrentTab(tab);
       }}
-      onOpenScenarios={() => setScenarioModalOpen(true)}
+      onOpenScenarios={() => setScenarioModalOpen(false || true)}
       onDataReset={handleDataReset}
       currentUser={currentUser}
       onRoleSwitch={handleRoleSwitch}
       alertCount={alertCount}
+      onOpenCopilot={() => setCopilotOpen(true)}
+      onOpenTransaction={handleOpenTransaction}
+      onOpenCustomer={handleOpenCustomer}
+      onOpenDevice={handleOpenDevice}
     >
       {renderContent()}
 
@@ -126,6 +169,32 @@ export default function App() {
         onSelectScenario={(txId) => {
           handleOpenTransaction(txId);
         }}
+      />
+
+      {/* Risk Copilot AI Drawer */}
+      <RiskCopilot
+        isOpen={copilotOpen}
+        onClose={() => setCopilotOpen(false)}
+        onOpenTransaction={handleOpenTransaction}
+        onOpenCustomer={handleOpenCustomer}
+        onOpenDevice={handleOpenDevice}
+      />
+
+      {/* Customer Profile & Timeline Modal */}
+      <CustomerProfileModal
+        customerId={selectedCustomerId}
+        isOpen={!!selectedCustomerId}
+        onClose={() => setSelectedCustomerId(null)}
+        onOpenTransaction={handleOpenTransaction}
+      />
+
+      {/* Device Investigation Modal */}
+      <DeviceInvestigationModal
+        deviceId={selectedDeviceId}
+        isOpen={!!selectedDeviceId}
+        onClose={() => setSelectedDeviceId(null)}
+        onOpenTransaction={handleOpenTransaction}
+        onOpenCustomer={handleOpenCustomer}
       />
     </Layout>
   );

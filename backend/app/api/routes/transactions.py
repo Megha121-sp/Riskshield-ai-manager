@@ -7,10 +7,29 @@ from fastapi import APIRouter, HTTPException, Query, Depends, status
 from backend.app.db.mongodb import db_manager, clean_mongo_doc
 from backend.app.models.schemas import Transaction, TransactionCreate, RiskScore, RiskAlert
 from backend.services.risk_engine import risk_engine
+from backend.services.priority_scoring import get_priority_investigation_queue, get_highest_priority_case
 from backend.app.audit.logger import log_audit_event
 
 logger = logging.getLogger("riskshield.api.transactions")
 router = APIRouter(prefix="/transactions", tags=["Transactions"])
+
+
+@router.get("/priority-queue", response_model=List[Dict[str, Any]])
+async def get_priority_queue(limit: int = Query(5, ge=1, le=20)):
+    """
+    Fetch prioritized investigation queue ranked dynamically by risk severity,
+    financial exposure, network connectivity, and urgency.
+    """
+    return await get_priority_investigation_queue(limit=limit)
+
+
+@router.get("/highest-priority", response_model=Optional[Dict[str, Any]])
+async def get_top_priority_case():
+    """
+    Retrieve the single highest-priority case for 1-click 'Investigate Now' action.
+    """
+    return await get_highest_priority_case()
+
 
 
 @router.post("", response_model=Dict[str, Any], status_code=status.HTTP_201_CREATED)

@@ -21,7 +21,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Clear token if invalid
       localStorage.removeItem('riskshield_token');
     }
     return Promise.reject(error);
@@ -59,6 +58,14 @@ export const transactionsAPI = {
   create: async (data) => {
     const res = await api.post('/transactions', data);
     return res.data;
+  },
+  getPriorityQueue: async (limit = 5) => {
+    const res = await api.get('/transactions/priority-queue', { params: { limit } });
+    return res.data;
+  },
+  getHighestPriority: async () => {
+    const res = await api.get('/transactions/highest-priority');
+    return res.data;
   }
 };
 
@@ -69,6 +76,35 @@ export const riskAPI = {
   },
   getScore: async (id) => {
     const res = await api.get(`/risk/${id}`);
+    return res.data;
+  },
+  simulate: async (data) => {
+    const res = await api.post('/risk/simulate', data);
+    return res.data;
+  },
+  getCounterfactuals: async (id) => {
+    const res = await api.get(`/risk/counterfactuals/${id}`);
+    return res.data;
+  }
+};
+
+export const copilotAPI = {
+  chat: async (message, context = null) => {
+    const res = await api.post('/copilot/chat', { message, context });
+    return res.data;
+  }
+};
+
+export const searchAPI = {
+  query: async (q) => {
+    const res = await api.get('/search', { params: { q } });
+    return res.data;
+  }
+};
+
+export const customersAPI = {
+  getProfile: async (id) => {
+    const res = await api.get(`/customers/${id}`);
     return res.data;
   }
 };
@@ -84,6 +120,10 @@ export const investigationsAPI = {
   },
   list: async () => {
     const res = await api.get('/investigations');
+    return res.data;
+  },
+  submitFeedback: async (data) => {
+    const res = await api.post('/investigations/feedback', data);
     return res.data;
   }
 };
@@ -137,6 +177,14 @@ export const analyticsAPI = {
   getMerchantCategories: async () => {
     const res = await api.get('/analytics/merchant-categories');
     return res.data;
+  },
+  getChanges: async () => {
+    const res = await api.get('/analytics/changes');
+    return res.data;
+  },
+  getExecutiveScorecard: async () => {
+    const res = await api.get('/analytics/executive-scorecard');
+    return res.data;
   }
 };
 
@@ -162,6 +210,25 @@ export const fraudAPI = {
   },
   getDevices: async () => {
     const res = await api.get('/fraud/devices');
+    return res.data;
+  },
+  getDeviceDetail: async (id) => {
+    const res = await api.get(`/fraud/devices/${id}`);
+    return res.data;
+  },
+  getNetworkGraph: async () => {
+    const res = await api.get('/fraud/network-graph');
+    return res.data;
+  }
+};
+
+export const systemAPI = {
+  getHealth: async () => {
+    const res = await api.get('/system/health-details');
+    return res.data;
+  },
+  getNotifications: async () => {
+    const res = await api.get('/system/notifications');
     return res.data;
   }
 };

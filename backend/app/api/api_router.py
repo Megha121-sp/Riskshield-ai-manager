@@ -10,7 +10,11 @@ from backend.app.api.routes import (
     analytics,
     model,
     fraud,
-    demo
+    demo,
+    copilot,
+    search,
+    customers,
+    system
 )
 
 api_router = APIRouter()
@@ -26,3 +30,7 @@ api_router.include_router(analytics.router)
 api_router.include_router(model.router)
 api_router.include_router(fraud.router)
 api_router.include_router(demo.router)
+api_router.include_router(copilot.router)
+api_router.include_router(search.router)
+api_router.include_router(customers.router)
+api_router.include_router(system.router)

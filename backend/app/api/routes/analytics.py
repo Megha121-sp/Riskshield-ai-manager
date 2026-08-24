@@ -6,11 +6,26 @@ from backend.services.analytics import (
     compute_overview_metrics,
     compute_fraud_trends,
     compute_payment_method_breakdown,
-    compute_merchant_category_breakdown
+    compute_merchant_category_breakdown,
+    compute_period_changes,
+    compute_executive_scorecard
 )
 
 logger = logging.getLogger("riskshield.api.analytics")
 router = APIRouter(prefix="/analytics", tags=["Analytics & Reporting"])
+
+
+@router.get("/changes", response_model=Dict[str, Any])
+async def get_period_changes():
+    """Retrieve 'What Changed Today?' period comparisons and root-cause analysis."""
+    return await compute_period_changes()
+
+
+@router.get("/executive-scorecard", response_model=Dict[str, Any])
+async def get_scorecard():
+    """Retrieve executive risk scorecard and business impact metrics."""
+    return await compute_executive_scorecard()
+
 
 
 @router.get("/overview", response_model=Dict[str, Any])

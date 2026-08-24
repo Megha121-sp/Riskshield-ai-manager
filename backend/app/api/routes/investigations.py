@@ -115,3 +115,24 @@ async def list_all_investigations(limit: int = 50):
     cursor = inv_coll.find().sort("created_at", -1).limit(limit)
     inv_list = await cursor.to_list(length=limit)
     return [Investigation(**clean_mongo_doc(i)) for i in inv_list]
+
+
+@router.post("/feedback", response_model=Dict[str, Any], status_code=status.HTTP_200_OK)
+async def record_analyst_feedback(payload: Dict[str, Any]):
+    """
+    Record analyst quality feedback on AI Agent recommendations for continuous offline evaluation.
+    """
+    feedback_coll = db_manager.get_collection("analyst_feedback")
+    doc = {
+        "transaction_id": payload.get("transaction_id"),
+        "investigation_id": payload.get("investigation_id"),
+        "ai_recommendation": payload.get("ai_recommendation"),
+        "analyst_decision": payload.get("analyst_decision"),
+        "feedback_rating": payload.get("feedback_rating", "CORRECT"),  # CORRECT, PARTIALLY_CORRECT, INCORRECT
+        "notes": payload.get("notes", ""),
+        "analyst_id": payload.get("analyst_id", "analyst@riskshield.ai"),
+        "created_at": payload.get("timestamp")
+    }
+    await feedback_coll.insert_one(dict(doc))
+    return {"status": "SUCCESS", "message": "Feedback recorded successfully."}
+
