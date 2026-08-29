@@ -1,5 +1,5 @@
 # 🛡️ RiskShield AI
-## Intelligent Payment Risk & Fraud Intelligence Platform
+**Intelligent Payment Risk & Fraud Intelligence Platform**
     Detect. Explain. Investigate. Decide. Audit
 RiskShield AI is an intelligent financial risk-management platform designed to help analysts detect suspicious payment activity, understand the reasons behind risk scores, uncover coordinated fraud networks, investigate cases using AI-assisted evidence synthesis, and maintain a complete audit trail of decisions.
 Instead of treating fraud detection as a simple "fraud / not fraud" classification problem, RiskShield turns individual risk signals into an end-to-end investigation workflow.    
@@ -22,7 +22,7 @@ What evidence supports the decision?
 Are other accounts connected to the same suspicious infrastructure?
 What should the analyst do next?
 Can the final decision be audited later?
-# RiskShield # AI is designed to answer these questions in a single workflow.
+**RiskShield AI** is designed to answer these questions in a single workflow.
 
 ## 💡Our Solution
 ```
@@ -42,7 +42,7 @@ into one risk-management platform.
 
 Core workflow
 
-. Payment Transaction
+**. Payment Transaction
         ↓
 . Risk Scoring
         ↓
@@ -58,8 +58,8 @@ Core workflow
         ↓
 . Analyst Decision
         ↓
-. Immutable Audit Trail
----
+. Immutable Audit Trail**
+
 
 ## 🛠️ Technology Stack
 
@@ -135,7 +135,7 @@ Instead of simply saying:
 "This transaction is risky."
 
 RiskShield explains:
-# "This transaction is risky primarily because its amount is significantly outside the customer's normal spending pattern." #
+**"This transaction is risky primarily because its amount is significantly outside the customer's normal spending pattern."**
 
 Risk-increasing signals
 🔴 High transaction amount
@@ -148,7 +148,8 @@ Risk-reducing signals
 🟢 Recognized device
 🟢 Established customer relationship
 
-### 1. Clone & Setup Backend
+## 🔧Quick Installation
+**1. Clone & Setup Backend**
 ```bash
 # Navigate to project directory
 cd riskshield-ai
@@ -171,7 +172,7 @@ uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 The backend will be live at `http://localhost:8000` (API Docs at `http://localhost:8000/docs`).
 
-### 2. Setup & Start Frontend
+**2. Setup & Start Frontend**
 ```bash
 # Navigate to frontend directory
 cd frontend
@@ -211,10 +212,8 @@ Primary risk signals:
 
 AI Recommendation:
 HOLD
-
 Confidence:
 95%
-
 Human Review:
 REQUIRED
 The AI assists the analyst but does not replace the final human decision
@@ -234,13 +233,13 @@ This enables detection of:
 # Fraud Rings & Clusters
 Identify groups of accounts connected through suspicious infrastructure.
 Example:
- 13 Accounts
+ **13 Accounts
       ↓
  15 Transactions
       ↓
  Shared Device
       ↓
- Shared Proxy / IP
+ Shared Proxy / IP**
 
 The system calculates:
 - Number of affected accounts
@@ -257,18 +256,16 @@ This allows analysts to investigate # fraud networks rather than isolated transa
 RiskShield monitors transaction activity over rolling time windows.
 The system compares current fraud activity against a historical baseline.
 Example:
- Historical Fraud Rate: 4.5%
-
+ **Historical Fraud Rate: 4.5%
  Current Activity
        ↓
  Deviation Detected
        ↓
  Potential Fraud Surge
        ↓
- Risk Alert
+ Risk Alert**
 
- This helps identify coordinated attacks and unusual bursts of suspicious activity.
----
+ **This helps identify coordinated attacks and unusual bursts of suspicious activity.**
 
 ## 📱Multi-Account Device Intelligence
 Suspicious devices can connect multiple customer accounts.
@@ -280,17 +277,17 @@ RiskShield maintains a device-level inventory showing:
 - Total transaction amount
 - Risk severity
 Example:
-DEV_CARDING_RING_404
+**DEV_CARDING_RING_404**
 
-13 linked accounts
+**13 linked accounts
 15 transactions
-15 fraud-associated transactions
+15 fraud-associated transactions**
 
-Risk:
+**Risk:**
 CRITICAL
 
-This provides a useful investigation starting point for identifying coordinated account activity.
----
+**This provides a useful investigation starting point for identifying coordinated account activity.**
+
 
 ## 🚨Risk Alert Management
 RiskShield automatically surfaces high-risk activity through a centralized alert queue.
@@ -304,41 +301,39 @@ Alerts contain:
 - Current status
 
 Supported alert states:
-  OPEN
+  **OPEN
    ↓
  INVESTIGATING
    ↓
- RESOLVED
+ RESOLVED**
 
- Additional states such as DISMISSED can be used when an alert is determined to be non-actionable.
- ---
+ *Additional states such as DISMISSED can be used when an alert is determined to be non-actionable.*
 
  ## 👨‍💻Human-in-the-Loop Analyst Decisions
 RiskShield is designed around a human-in-the-loop approach.
 
 Analysts can choose:
-# Approve Payment
+**Approve Payment**
 Clear the transaction for settlement.
-# Place Hold
+**Place Hold**
 Pause the transaction for additional investigation.
-# Block & Decline
+**Block & Decline**
 Decline and mark the transaction as confirmed fraud.
-# Escalate to SIU
+**Escalate to SIU**
 Forward the case to Special Investigations.
+
 The analyst must provide a justification before finalizing the decision.
 This prevents automated models from becoming the sole decision-maker.
----
-
 
  ## 🔐Immutable Audit Trai
 Every important action is recorded.
 The audit trail captures events such as:
 
-TRANSACTION_INGESTED
+**TRANSACTION_INGESTED
 AI_INVESTIGATION_COMPLETED
 HUMAN_DECISION_RECORDED
-ALERT_STATUS_UPDATED
----
+ALERT_STATUS_UPDATED**
+
 Each record can contain:
 - Event ID
 - Timestamp
@@ -372,8 +367,8 @@ Precision      100%
 Recall         100%
 FPR            0.1%
 
-Note: These metrics represent the project's current evaluation/demo dataset and should not be interpreted as guaranteed real-world production performance.
----
+**Note: These metrics represent the project's current evaluation/demo dataset and should not be interpreted as guaranteed real-world production performance.**
+
 
  ## 💰Financial ROI & Risk Analytics
 RiskShield translates fraud detection into business impact.
@@ -435,27 +430,27 @@ The assessment can include:
 - Confidence score
 - Scenario analysis.
 
-# Important
+**Important**
 This feature is intended as an analytical decision-support system, not financial or investment advice.
 Where demo/simulated data is used, it is clearly labeled.
----
+
 
  ## 🧪 Interactive Demo Scenarios
 RiskShield includes predefined scenarios for demonstrating different risk patterns.
 Examples include:
-# High-Value Transaction
+**High-Value Transaction**
 Abnormally large transaction compared with historical spending.
-# Fraud Spike
+**Fraud Spike**
 Multiple suspicious transactions occurring within a short time period.
-# Unrecognized Device
+**Unrecognized Device**
 Transaction originating from previously unseen hardware.
-# Shared Device Fraud Ring
+**Shared Device Fraud Ring**
 Multiple accounts connected through suspicious hardware.
-# Suspicious IP Infrastructure
+**Suspicious IP Infrastructure**
 Multiple accounts associated with the same proxy/IP.
 
-These scenarios make the platform easy to demonstrate during evaluation.
----
+**These scenarios make the platform easy to demonstrate during evaluation.**
+
 
  ## 🏗️ System Architecture
                     ┌──────────────────────┐
@@ -511,20 +506,71 @@ These scenarios make the platform easy to demonstrate during evaluation.
 ---
 
 ## 📂 Project Structure
-RiskShield translates fraud detection into business impact.
-The analytics dashboard provides indicators such as:
-- Potential amount protected
-- False-positive cost
-- Average investigation time
-- Net risk-shield ROI
-
-The objective is to connect:
-
-Better Detection
-       ↓
-Faster Investigation
-       ↓
-Reduced Fraud Loss
+```text
+RiskShield-AI/
+│
+├── backend/
+│   ├── app/
+│   │   ├── agent/              # AI investigation agent
+│   │   ├── api/                # Backend API endpoints
+│   │   ├── audit/              # Immutable audit functionality
+│   │   ├── core/               # Core configuration and utilities
+│   │   ├── db/                 # Database layer
+│   │   ├── models/             # Data models
+│   │   └── main.py             # Backend entry point
+│   │
+│   ├── ml/
+│   │   ├── explainability.py   # SHAP/model explainability
+│   │   ├── model_loader.py     # ML model loading
+│   │   └── prediction.py       # Fraud/risk prediction
+│   │
+│   ├── scripts/
+│   │   ├── generate_data.py    # Demo/training data generation
+│   │   └── train_model.py      # Model training pipeline
+│   │
+│   ├── services/
+│   │   ├── analytics.py
+│   │   ├── anomaly_detection.py
+│   │   ├── facility_risk.py
+│   │   ├── feature_engineering.py
+│   │   ├── fraud_clusters.py
+│   │   ├── fraud_spikes.py
+│   │   ├── priority_scoring.py
+│   │   ├── risk_engine.py
+│   │   └── risk_simulator.py
+│   │
+│   ├── tests/
+│   │   ├── conftest.py
+│   │   ├── test_agent.py
+│   │   ├── test_api.py
+│   │   ├── test_db.py
+│   │   ├── test_enhanced_features.py
+│   │   ├── test_facility_risk.py
+│   │   ├── test_feature_engineering.py
+│   │   ├── test_ml_models.py
+│   │   ├── test_risk_engine.py
+│   │   └── test_security.py
+│   │
+│   └── docs/
+│       ├── api.md
+│       ├── architecture.md
+│       └── methodology.md
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── index.html
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   └── vite.config.js
+│
+├── ml/
+├── Dockerfile.backend
+├── Dockerfile.frontend
+├── .env.example
+├── .gitignore
+└── .dockerignore
        ↓
 Reduced Analyst Workload
        ↓
