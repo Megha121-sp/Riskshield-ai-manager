@@ -14,7 +14,8 @@ import { alertsAPI } from '../services/api';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { formatDate } from '../utils/formatters';
 
-export default function AlertsPage({ onOpenTransaction }) {
+export default function AlertsPage({ onOpenTransaction, onNavigateTab }) {
+
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('');
@@ -149,10 +150,25 @@ export default function AlertsPage({ onOpenTransaction }) {
                   ))}
                 </div>
               )}
+
+              {/* Linked Facility */}
+              {alert.facility_type && (
+                <div className="flex items-center gap-2 pt-1 text-xs">
+                  <span className="text-slate-500 font-medium">Linked Facility:</span>
+                  <button
+                    onClick={() => onNavigateTab && onNavigateTab('facilities')}
+                    className="px-2 py-0.5 rounded bg-indigo-950/80 border border-indigo-800/60 font-mono text-indigo-300 hover:text-white text-[11px] font-bold flex items-center gap-1 transition-colors"
+                  >
+                    <span>{alert.facility_type}</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
       )}
+
     </div>
   );
 }

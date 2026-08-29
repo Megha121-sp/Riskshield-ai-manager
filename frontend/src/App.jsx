@@ -9,6 +9,7 @@ import FraudIntelligencePage from './pages/FraudIntelligencePage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ModelPerformancePage from './pages/ModelPerformancePage';
 import AuditLogsPage from './pages/AuditLogsPage';
+import FacilityRiskPage from './pages/FacilityRiskPage';
 import ScenarioModal from './components/common/ScenarioModal';
 import RiskCopilot from './components/copilot/RiskCopilot';
 import CustomerProfileModal from './components/customer/CustomerProfileModal';
@@ -108,12 +109,28 @@ export default function App() {
             onOpenTransaction={handleOpenTransaction}
             onOpenCustomer={handleOpenCustomer}
             onOpenDevice={handleOpenDevice}
+            onNavigateTab={(tab) => setCurrentTab(tab)}
+          />
+        );
+      case 'facilities':
+        return (
+          <FacilityRiskPage
+            key={refreshKey}
+            currentUser={currentUser}
+            onOpenAlerts={() => setCurrentTab('alerts')}
+            onOpenAudit={() => setCurrentTab('audit')}
           />
         );
       case 'transactions':
         return <TransactionsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
       case 'alerts':
-        return <AlertsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
+        return (
+          <AlertsPage
+            key={refreshKey}
+            onOpenTransaction={handleOpenTransaction}
+            onNavigateTab={(tab) => setCurrentTab(tab)}
+          />
+        );
       case 'investigations':
         return <InvestigationsPage key={refreshKey} onOpenTransaction={handleOpenTransaction} />;
       case 'fraud':
@@ -138,10 +155,12 @@ export default function App() {
             onOpenTransaction={handleOpenTransaction}
             onOpenCustomer={handleOpenCustomer}
             onOpenDevice={handleOpenDevice}
+            onNavigateTab={(tab) => setCurrentTab(tab)}
           />
         );
     }
   };
+
 
   return (
     <Layout

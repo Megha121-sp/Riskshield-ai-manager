@@ -14,7 +14,8 @@ from backend.app.api.routes import (
     copilot,
     search,
     customers,
-    system
+    system,
+    facilities
 )
 
 api_router = APIRouter()
@@ -34,3 +35,4 @@ api_router.include_router(copilot.router)
 api_router.include_router(search.router)
 api_router.include_router(customers.router)
 api_router.include_router(system.router)
+api_router.include_router(facilities.router)

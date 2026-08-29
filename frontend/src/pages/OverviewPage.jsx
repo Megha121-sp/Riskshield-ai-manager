@@ -17,7 +17,8 @@ import {
   Network,
   Users,
   DollarSign,
-  Scale
+  Scale,
+  Landmark
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -33,7 +34,7 @@ import {
   Bar
 } from 'recharts';
 
-import { analyticsAPI, transactionsAPI, alertsAPI } from '../services/api';
+import { analyticsAPI, transactionsAPI, alertsAPI, facilitiesAPI } from '../services/api';
 import MetricCard from '../components/common/MetricCard';
 import RiskBadge from '../components/common/RiskBadge';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -41,7 +42,8 @@ import { formatCurrency, formatNumber, formatPercent, formatDate } from '../util
 
 const RISK_COLORS = ['#10b981', '#f59e0b', '#ef4444'];
 
-export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpenDevice }) {
+export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpenDevice, onNavigateTab }) {
+
   const [metrics, setMetrics] = useState(null);
   const [trends, setTrends] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -50,12 +52,13 @@ export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpen
   const [topPriorityCase, setTopPriorityCase] = useState(null);
   const [periodChanges, setPeriodChanges] = useState(null);
   const [scorecard, setScorecard] = useState(null);
+  const [facilitySummary, setFacilitySummary] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [m, t, pm, mc, pq, topC, chg, sc] = await Promise.all([
+        const [m, t, pm, mc, pq, topC, chg, sc, fac] = await Promise.all([
           analyticsAPI.getOverview(),
           analyticsAPI.getFraudTrend(),
           analyticsAPI.getPaymentMethods(),
@@ -63,7 +66,8 @@ export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpen
           transactionsAPI.getPriorityQueue(5),
           transactionsAPI.getHighestPriority(),
           analyticsAPI.getChanges(),
-          analyticsAPI.getExecutiveScorecard()
+          analyticsAPI.getExecutiveScorecard(),
+          facilitiesAPI.getOverviewSummary()
         ]);
         setMetrics(m);
         setTrends(t);
@@ -73,6 +77,7 @@ export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpen
         setTopPriorityCase(topC);
         setPeriodChanges(chg);
         setScorecard(sc);
+        setFacilitySummary(fac);
       } catch (err) {
         console.error('Failed to load overview command center analytics:', err);
       } finally {
@@ -81,6 +86,7 @@ export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpen
     }
     loadData();
   }, []);
+
 
   if (loading) {
     return <LoadingSpinner text="Initializing Enterprise Risk Command Center..." size="lg" />;
@@ -469,6 +475,72 @@ export default function OverviewPage({ onOpenTransaction, onOpenCustomer, onOpen
           </div>
         </div>
       </div>
+
+      {/* 6. Financial Facility Risk Summary Cards (DEMO / SIMULATED DATA) */}
+      <div className="p-5 bg-slate-900/70 border border-slate-800 rounded-2xl glass-card space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <Landmark className="w-4 h-4 text-indigo-400" />
+              Financial Facility Risk Summary
+            </h3>
+            <p className="text-xs text-slate-400">Scheme and portfolio-level risk intelligence across 8 primary lending programs</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-amber-300 border border-amber-800/40 font-semibold">
+              DEMO / SIMULATED DATA
+            </span>
+            {onNavigateTab && (
+              <button
+                onClick={() => onNavigateTab('facilities')}
+                className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-colors flex items-center gap-1.5"
+              >
+                <span>Explore Facility Risk Intelligence</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <MetricCard
+            title="Facility Risk Alerts"
+            value={facilitySummary?.facility_risk_alerts || 4}
+            subtitle="Threshold crossings"
+            iconName="ShieldAlert"
+            variant="danger"
+          />
+          <MetricCard
+            title="High-Risk Facilities"
+            value={facilitySummary?.high_risk_facilities || 4}
+            subtitle="Personal, Consumer, MSME"
+            iconName="AlertTriangle"
+            variant="danger"
+          />
+          <MetricCard
+            title="Facilities Under Review"
+            value={facilitySummary?.facilities_under_review || 8}
+            subtitle="Active evaluation"
+            iconName="Clock"
+            variant="indigo"
+          />
+          <MetricCard
+            title="Average Facility Risk"
+            value={`${facilitySummary?.average_facility_risk || 55.8}/100`}
+            subtitle="Weighted portfolio index"
+            iconName="Scale"
+            variant="default"
+          />
+          <MetricCard
+            title="Total Exposure Monitored"
+            value={facilitySummary?.total_exposure_under_review || '₹1,43,600 Cr'}
+            subtitle="Aggregate facility GMV"
+            iconName="DollarSign"
+            variant="success"
+          />
+        </div>
+      </div>
     </div>
+
   );
 }

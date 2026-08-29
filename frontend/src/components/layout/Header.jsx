@@ -43,6 +43,7 @@ export default function Header({
 
   const titles = {
     overview: 'Risk Command Center',
+    facilities: 'Financial Facility Risk Intelligence',
     transactions: 'Transaction Risk Queue',
     alerts: 'Active Risk Alerts',
     investigations: 'AI Deep Investigations',
@@ -51,6 +52,7 @@ export default function Header({
     model: 'ML Model Performance & SHAP',
     audit: 'Immutable Audit Trail'
   };
+
 
   // Debounced search query
   useEffect(() => {

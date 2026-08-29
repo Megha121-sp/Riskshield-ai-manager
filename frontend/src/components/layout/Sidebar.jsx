@@ -9,12 +9,14 @@ import {
   Sliders,
   FileClock,
   ShieldCheck,
-  Zap
+  Zap,
+  Landmark
 } from 'lucide-react';
 
 export default function Sidebar({ currentTab, setTab, onOpenScenarios, alertCount = 0 }) {
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    { id: 'facilities', label: 'Facility Risk', icon: Landmark },
     { id: 'transactions', label: 'Transactions', icon: Receipt },
     { id: 'alerts', label: 'Risk Alerts', icon: ShieldAlert, badge: alertCount },
     { id: 'investigations', label: 'Investigations', icon: SearchCode },
@@ -23,6 +25,7 @@ export default function Sidebar({ currentTab, setTab, onOpenScenarios, alertCoun
     { id: 'model', label: 'Model Performance', icon: Sliders },
     { id: 'audit', label: 'Audit Logs', icon: FileClock },
   ];
+
 
   return (
     <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0 h-screen sticky top-0">

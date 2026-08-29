@@ -248,4 +248,37 @@ export const demoAPI = {
   }
 };
 
+export const facilitiesAPI = {
+
+  list: async () => {
+    const res = await api.get('/facilities');
+    return res.data;
+  },
+  get: async (facilityType) => {
+    const res = await api.get(`/facilities/${encodeURIComponent(facilityType)}`);
+    return res.data;
+  },
+  simulate: async (data) => {
+    const res = await api.post('/facilities/simulate', data);
+    return res.data;
+  },
+  submitDecision: async (data) => {
+    const res = await api.post('/facilities/decision', data);
+    return res.data;
+  },
+  getOverviewSummary: async () => {
+    const res = await api.get('/facilities/overview-summary');
+    return res.data;
+  },
+  getConfig: async () => {
+    const res = await api.get('/facilities/config');
+    return res.data;
+  },
+  updateConfig: async (data) => {
+    const res = await api.post('/facilities/config', data);
+    return res.data;
+  }
+};
+
 export default api;
+

@@ -221,3 +221,105 @@ class ModelEvaluationMetrics(BaseModel):
     fpr: float
     confusion_matrix: Dict[str, int]
     feature_importances: List[Dict[str, Any]]
+
+
+# --- FINANCIAL FACILITY RISK INTELLIGENCE SCHEMAS ---
+class FacilityFactor(BaseModel):
+    name: str
+    impact: float  # Positive = risk-increasing, Negative = risk-reducing
+    explanation: str
+    factor_type: str  # RISK_INCREASING or RISK_REDUCING
+
+
+class FacilityProfile(BaseModel):
+    facility_type: str
+    typical_tenure: str
+    risk_category: str
+    collateral_requirement: str
+    repayment_structure: str
+    portfolio_exposure: str
+    data_coverage: str
+    assessment_date: str
+
+
+class FacilityHistoricalPoint(BaseModel):
+    period: str
+    risk_score: float
+    default_rate: float
+
+
+class FacilityRiskAssessment(BaseModel):
+    facility_id: str
+    facility_name: str
+    facility_type: Optional[str] = None
+    risk_score: float  # 0–100
+
+    risk_level: str  # LOW, MODERATE, HIGH, CRITICAL, INSUFFICIENT_DATA
+    suitability_signal: str  # LOWER RISK, MODERATE RISK, HIGHER RISK, INSUFFICIENT DATA
+    suitability_recommendation: str
+    default_risk: float
+    default_risk_level: str
+    portfolio_risk: float
+    portfolio_risk_level: str
+    loss_severity: float
+    loss_severity_level: str
+    liquidity_risk: float
+    liquidity_risk_level: str
+    concentration_risk: float
+    concentration_risk_level: str
+    operational_risk: float
+    data_confidence: float
+    confidence_level: str
+    executive_assessment: str
+    primary_concern: str
+    risk_trend: str  # STABLE, IMPROVING, DETERIORATING
+    risk_factors: List[FacilityFactor]
+    profile: FacilityProfile
+    historical_trend: List[FacilityHistoricalPoint]
+    disclaimer: str = "RiskShield provides analytical risk signals for decision support and does not constitute financial or investment advice. Actual risk depends on borrower quality, portfolio composition, market conditions, institution policies, and other factors."
+    is_demo_data: bool = True
+    engine_version: str = "Rule-based / Illustrative Facility Risk Engine v1.0"
+    assessment_id: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class FacilityScenarioRequest(BaseModel):
+    facility_type: str
+    default_rate: str = "MEDIUM"  # LOW, MEDIUM, HIGH
+    income_stability: str = "MEDIUM"  # LOW, MEDIUM, HIGH
+    loan_tenure: str = "MEDIUM"  # SHORT, MEDIUM, LONG
+    collateral_coverage: str = "MEDIUM"  # LOW, MEDIUM, HIGH
+    portfolio_concentration: str = "MEDIUM"  # LOW, MEDIUM, HIGH
+
+
+class FacilityScenarioResponse(BaseModel):
+    facility_type: str
+    original_score: float
+    projected_score: float
+    score_delta: float
+    original_level: str
+    projected_level: str
+    original_suitability: str
+    projected_suitability: str
+    key_drivers: List[str]
+    disclaimer: str = "Illustrative scenario — not a forecast."
+    is_demo_data: bool = True
+
+
+class FacilityDecisionRequest(BaseModel):
+    facility_id: str
+    facility_type: str
+    risk_score: float
+    decision: str  # REVIEW, APPROVE_FOR_CONSIDERATION, REQUEST_MORE_DATA, ESCALATE
+    notes: str
+    analyst_id: str = "analyst@riskshield.ai"
+
+
+class FacilityConfigSchema(BaseModel):
+    low_threshold: int = 30
+    moderate_threshold: int = 60
+    high_threshold: int = 80
+    confidence_threshold: int = 70
+    alert_threshold: int = 65
+    alerts_enabled: bool = True
+
