@@ -69,7 +69,7 @@ Core workflow
 - HTML5
 - CSS
 - Responsive dashboard UI
-- 
+ 
 **Machine Learning**
 - Python
 - XGBoost
@@ -77,27 +77,27 @@ Core workflow
 - Isolation Forest
 - SHAP / TreeSHAP
 - Feature engineering
-- 
+
 **Data**
 - Transactional data
 - Customer profiles
 - Device information
 - IP/network signals
 - Behavioral features
-- 
+ 
 **Risk Intelligence**
 - Graph-based relationship analysis
 - Device linkage
 - IP linkage
 - Fraud cluster detection
 - Rolling-window anomaly detection
-- 
+  
 **AI**
 - AI-assisted investigation
 - Evidence synthesis
 - Risk explanation
 - Policy recommendation
-- 
+  
 **Audit & Governance**
 - Analyst decision logging
 - Alert status history
