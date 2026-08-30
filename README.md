@@ -137,13 +137,13 @@ Instead of simply saying:
 RiskShield explains:
 **"This transaction is risky primarily because its amount is significantly outside the customer's normal spending pattern."**
 
-Risk-increasing signals
+Risk-increasing signals:
 🔴 High transaction amount
 🔴 Abnormal spending deviation
 🔴 Unusual velocity
 🔴 Unrecognized device
 
-Risk-reducing signals
+Risk-reducing signals:
 🟢 Normal recent transaction velocity
 🟢 Recognized device
 🟢 Established customer relationship
@@ -199,7 +199,7 @@ The Investigation Agent synthesizes:
 - Fraud-network evidence
 into an analyst-friendly investigation report.
 
-# Example output
+**Example output**
 EXECUTIVE ASSESSMENT
 
 Transaction classified as HIGH RISK.
@@ -230,7 +230,7 @@ Customer
    └── Transactions
 
 This enables detection of:
-# Fraud Rings & Clusters
+**Fraud Rings & Clusters**
 Identify groups of accounts connected through suspicious infrastructure.
 Example:
  **13 Accounts
