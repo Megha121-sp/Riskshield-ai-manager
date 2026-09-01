@@ -1,10 +1,10 @@
-# 🛡️ RiskShield AI
+## RiskShield AI
 **Intelligent Payment Risk & Fraud Intelligence Platform**
     Detect. Explain. Investigate. Decide. Audit
 RiskShield AI is an intelligent financial risk-management platform designed to help analysts detect suspicious payment activity, understand the reasons behind risk scores, uncover coordinated fraud networks, investigate cases using AI-assisted evidence synthesis, and maintain a complete audit trail of decisions.
 Instead of treating fraud detection as a simple "fraud / not fraud" classification problem, RiskShield turns individual risk signals into an end-to-end investigation workflow.    
     
-## 🚨 The Problem
+##  The Problem
 Modern payment fraud is becoming increasingly sophisticated.
 A transaction may appear suspicious because of:
 - Unusually high transaction amounts
@@ -24,7 +24,7 @@ What should the analyst do next?
 Can the final decision be audited later?
 **RiskShield AI** is designed to answer these questions in a single workflow.
 
-## 💡Our Solution
+## Our Solution
 ```
 DETECT ──► SCORE ──► EXPLAIN ──► INVESTIGATE ──► RECOMMEND ──► REVIEW ──► AUDIT
 ```
@@ -61,7 +61,7 @@ Core workflow
 . Immutable Audit Trail**
 
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 **Frontend**
 - React
@@ -106,7 +106,7 @@ Core workflow
 
 ---
 
-## ✨Key Features
+## Key Features
 Every transaction receives a normalized 0–100 risk score.
 Example:
 Risk Score: 82 / 100
@@ -122,7 +122,7 @@ The scoring system combines multiple signals such as:
 - Anomaly signals.
 ---
 
-## 🔍Explainable AI with SHAP
+## Explainable AI with SHAP
 A major problem with fraud detection systems is the black-box problem.
 RiskShield uses TreeSHAP-based feature attribution to explain why a transaction received its risk score.
 Example:
@@ -148,7 +148,7 @@ Risk-reducing signals:
 🟢 Recognized device
 🟢 Established customer relationship
 
-## 🔧Quick Installation
+## Quick Installation
 **1. Clone & Setup Backend**
 ```bash
 # Navigate to project directory
@@ -187,7 +187,7 @@ The dashboard will be available at `http://localhost:5173`.
 
 ---
 
-## 🧠AI Investigation Agent
+## AI Investigation Agent
 RiskShield includes an AI-assisted investigation workflow.
 The Investigation Agent synthesizes:
 - ML risk signals
@@ -218,7 +218,7 @@ Human Review:
 REQUIRED
 The AI assists the analyst but does not replace the final human decision
 
-## 🕸️Fraud Intelligence & Network Analysis
+## Fraud Intelligence & Network Analysis
 Fraud is often coordinated.
 RiskShield therefore analyzes relationships between:
 Customer
@@ -252,7 +252,7 @@ The system calculates:
 This allows analysts to investigate # fraud networks rather than isolated transactions. #
 ---
 
-## 📈Fraud Spikes & Surge Detection
+## Fraud Spikes & Surge Detection
 RiskShield monitors transaction activity over rolling time windows.
 The system compares current fraud activity against a historical baseline.
 Example:
@@ -267,7 +267,7 @@ Example:
 
  **This helps identify coordinated attacks and unusual bursts of suspicious activity.**
 
-## 📱Multi-Account Device Intelligence
+## Multi-Account Device Intelligence
 Suspicious devices can connect multiple customer accounts.
 RiskShield maintains a device-level inventory showing:
 - Device ID
@@ -289,7 +289,7 @@ CRITICAL
 **This provides a useful investigation starting point for identifying coordinated account activity.**
 
 
-## 🚨Risk Alert Management
+## Risk Alert Management
 RiskShield automatically surfaces high-risk activity through a centralized alert queue.
 Alerts contain:
 - Risk severity
@@ -309,7 +309,7 @@ Supported alert states:
 
  *Additional states such as DISMISSED can be used when an alert is determined to be non-actionable.*
 
- ## 👨‍💻Human-in-the-Loop Analyst Decisions
+ ## Human-in-the-Loop Analyst Decisions
 RiskShield is designed around a human-in-the-loop approach.
 
 Analysts can choose:
@@ -325,7 +325,7 @@ Forward the case to Special Investigations.
 The analyst must provide a justification before finalizing the decision.
 This prevents automated models from becoming the sole decision-maker.
 
- ## 🔐Immutable Audit Trai
+ ## Immutable Audit Trai
 Every important action is recorded.
 The audit trail captures events such as:
 
@@ -345,7 +345,7 @@ Each record can contain:
 This provides traceability from:
 Transaction → AI analysis → Alert → Investigation → Human decision.
 
- ## 📊Model Performance Dashboard
+ ## Model Performance Dashboard
 RiskShield includes a dedicated ML performance dashboard.
 It provides:
 - F1 Score
@@ -370,7 +370,7 @@ FPR            0.1%
 **Note: These metrics represent the project's current evaluation/demo dataset and should not be interpreted as guaranteed real-world production performance.**
 
 
- ## 💰Financial ROI & Risk Analytics
+ ## Financial ROI & Risk Analytics
 RiskShield translates fraud detection into business impact.
 The analytics dashboard provides indicators such as:
 - Potential amount protected
@@ -390,7 +390,7 @@ Reduced Analyst Workload
        ↓
 Improved Risk Operations.
 
- ## 🏦Financial Facility Risk Intelligence
+ ## Financial Facility Risk Intelligence
 Optional/extended RiskShield capability
 RiskShield can also evaluate broader financial facilities such as:
 - Education Loans
@@ -435,7 +435,7 @@ This feature is intended as an analytical decision-support system, not financial
 Where demo/simulated data is used, it is clearly labeled.
 
 
- ## 🧪 Interactive Demo Scenarios
+ ## Interactive Demo Scenarios
 RiskShield includes predefined scenarios for demonstrating different risk patterns.
 Examples include:
 **High-Value Transaction**
@@ -452,7 +452,7 @@ Multiple accounts associated with the same proxy/IP.
 **These scenarios make the platform easy to demonstrate during evaluation.**
 
 
- ## 🏗️ System Architecture
+ ## System Architecture
                     ┌──────────────────────┐
                     │   Payment Events     │
                     │ Transactions / Data  │
@@ -505,7 +505,7 @@ Multiple accounts associated with the same proxy/IP.
               └──────────────────┘
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```text
 RiskShield-AI/
 │
